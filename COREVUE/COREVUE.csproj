@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="vue" Version="2.6.11" />
     <PackageReference Include="VueCliMiddleware" Version="3.0.0" />
   </ItemGroup>
 
