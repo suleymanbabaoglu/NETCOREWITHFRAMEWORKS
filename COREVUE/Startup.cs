@@ -1,3 +1,6 @@
+using AutoMapper;
+using COREVUE.Models;
+using COREVUE.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +28,11 @@ namespace COREVUE
             {
                 configuration.RootPath = "ClientApp";
             });
+            
+            services.AddDbContext<DBContext>();            
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
