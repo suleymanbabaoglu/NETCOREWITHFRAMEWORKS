@@ -2,16 +2,16 @@ import axios from "axios";
 import { Base, CRUDRoutes } from "../constraints/Routes";
 /*import { ErrorConstraints, ReturnConstraints } from "../helpers/Constraints";*/
 
-export default class BaseService {
+export default class BaseActions {
   constructor(controllerRoute) {
     this.controllerRoute = controllerRoute;
-    // this.refreshToken = localStorage.getItem("webRefreshToken");
+    // this.refreshToken = localStorage.getItem("refreshToken");
   }
 
   getRequestHeader() {
     return {
       "Content-Type": "application/json"
-      // Authorization: "Bearer " + localStorage.getItem("webToken"),
+      // Authorization: "Bearer " + localStorage.getItem("token"),
     };
   }
 

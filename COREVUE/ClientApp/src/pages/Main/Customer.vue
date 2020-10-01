@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import BaseService from "../../services/BaseService";
+import BaseActions from "../../store/BaseActions";
 import { ControllerRoutes } from "../../constraints/Routes";
 
 export default {
@@ -36,10 +36,10 @@ export default {
   },
   methods: {
     async initialize() {
-      this.items = await new BaseService(ControllerRoutes.Customer).getAll();
+      this.items = await new BaseActions(ControllerRoutes.Customer).getAll();
     },
     async deleteCustomer(customerId) {
-      await new BaseService(ControllerRoutes.Customer).delete(customerId);
+      await new BaseActions(ControllerRoutes.Customer).delete(customerId);
       this.items.splice(
         this.items.indexOf(this.items.find(c => c.id === customerId)),
         1

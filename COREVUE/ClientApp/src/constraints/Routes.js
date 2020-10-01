@@ -30,3 +30,24 @@ export const CRUDRoutes = {
     return controller + `getById/${objectId}`;
   }
 };
+
+export const AccountRoutes = {
+  Register() {
+    return Account + "register";
+  },
+  PasswordReset() {
+    return Account + "passwordReset";
+  }
+};
+
+export const AuthRoutes = {
+  Login() {
+    return Authentication + "login";
+  },
+  LoginByRefreshToken() {
+    return Authentication + "loginByRefreshToken";
+  },
+  Logout() {
+    return Authentication + "logout";
+  }
+};
