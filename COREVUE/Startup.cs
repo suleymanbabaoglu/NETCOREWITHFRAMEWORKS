@@ -2,6 +2,7 @@ using AutoMapper;
 using COREVUE.Models;
 using COREVUE.Models.Entities;
 using COREVUE.Repositories;
+using COREVUE.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +40,7 @@ namespace COREVUE
 
             services.AddDbContext<DBContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IAuthService, AuthService>();
 
             services.AddAutoMapper(typeof(Startup));
 

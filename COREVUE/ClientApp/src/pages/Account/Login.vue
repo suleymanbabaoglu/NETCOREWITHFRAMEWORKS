@@ -124,6 +124,8 @@
 </template>
 
 <script>
+import { Actions } from "../../constraints/Constraints";
+
 export default {
   data() {
     return {
@@ -135,7 +137,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      alert(JSON.stringify(this.form));
+      this.$store.dispatch(Actions.LOGIN, this.form);
     }
   }
 };

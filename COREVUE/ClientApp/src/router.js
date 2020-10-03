@@ -35,7 +35,7 @@ export const routes = [
       { path: "product", component: Product, name: "product" },
       { path: "settings", component: Settings, name: "settings" }
     ],
-    meta: { requiresAuth: false }
+    meta: { requiresAuth: true }
   },
   { path: "/notfound", component: NotFound, name: "notfound" },
   { path: "*", redirect: "/notfound" }

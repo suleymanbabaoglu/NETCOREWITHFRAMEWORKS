@@ -5,13 +5,13 @@ import { Base, CRUDRoutes } from "../constraints/Routes";
 export default class BaseActions {
   constructor(controllerRoute) {
     this.controllerRoute = controllerRoute;
-    // this.refreshToken = localStorage.getItem("refreshToken");
+    this.refreshToken = localStorage.getItem("refreshToken");
   }
 
   getRequestHeader() {
     return {
-      "Content-Type": "application/json"
-      // Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token")
     };
   }
 
