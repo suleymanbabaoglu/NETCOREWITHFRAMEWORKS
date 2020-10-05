@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Miracle.Api.Services.Helpers.Sha512Hash
+namespace COREVUE.Helpers.Sha512Hash
 {
 
     public class Sha512Encryptor

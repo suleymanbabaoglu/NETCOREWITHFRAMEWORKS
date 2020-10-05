@@ -1,3 +1,3 @@
-export const getAuth = state => {
-  return state.isAuthenticated;
+export const getAuth = () => {
+
 };

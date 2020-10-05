@@ -32,7 +32,29 @@ namespace COREVUE
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddControllers();
+            services.AddControllers()
+              .AddNewtonsoftJson();
+            services.AddAuthentication(s =>
+            {
+                s.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                s.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+               .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+               {
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       LifetimeValidator = LifetimeValidator,
+                       ClockSkew = TimeSpan.Zero,
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecurityKey"])),
+                       ValidateLifetime = true,
+                       ValidateAudience = false,
+                       ValidateIssuer = false
+                   };
+                   options.Events = new JwtBearerEvents
+                   {
+                       OnTokenValidated = OnTokenValidated
+                   };
+               });
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp";
@@ -41,30 +63,11 @@ namespace COREVUE
             services.AddDbContext<DBContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddAutoMapper(typeof(Startup));
-
-            services.AddAuthentication(s =>
-            {
-                s.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                s.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        LifetimeValidator = LifetimeValidator,
-                        ClockSkew = TimeSpan.Zero,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecurityKey"])),
-                        ValidateLifetime = true,
-                        ValidateAudience = false,
-                        ValidateIssuer = false
-                    };
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnTokenValidated = OnTokenValidated
-                    };
-                });
         }
         private bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken token, TokenValidationParameters @params)
         {
@@ -86,11 +89,11 @@ namespace COREVUE
                 if (user == null)
                     context.Fail("Invalid User");
 
-                if (user.Token == null)
+                if (user != null && user.Token == null)
                     context.Fail("Invalid Token");
 
                 var requestToken = context.HttpContext.Request.Headers["Authorization"].ToString().Substring(7);
-                if (user.Token != requestToken)
+                if (user != null && user.Token != requestToken)
                     context.Fail("Invalid Token");
             }
             catch

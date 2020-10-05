@@ -8,27 +8,28 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import { Actions } from "./constraints/Constraints";
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(Axios, VueAxios);
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!store.getters["getAuth"]) {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.dispatch(Actions.IS_AUTHENTICATED)) {
       next({
         path: "account/login",
-        query: { redirect: to.fullPath },
+        query: { redirect: to.fullPath }
       });
     } else {
       next();
     }
-  }  else {
+  } else {
     next();
   }
 });
-router.beforeResolve((to, from, next)=> {
-  next() // DO IT!
+router.beforeResolve((to, from, next) => {
+  next(); // DO IT!
 });
 new Vue({
   router,

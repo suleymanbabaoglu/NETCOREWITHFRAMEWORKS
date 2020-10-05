@@ -1,4 +1,5 @@
 ﻿using COREVUE.Helpers;
+using COREVUE.Helpers.Attributes;
 using COREVUE.Models.Entities;
 using COREVUE.Services;
 using COREVUE.ViewModels;
@@ -25,15 +26,15 @@ namespace COREVUE.Controllers
         }
 
         [HttpPost, Route(AuthRoutes.LoginByRefreshToken)]
-        public User LoginByRefreshToken([FromBody]string refreshToken)
+        public User LoginByRefreshToken([FromBody] string refreshToken)
         {
             return authService.LoginByRefreshToken(refreshToken);
         }
 
-        [HttpGet, Route(AuthRoutes.Logout), Authorize]
+        [HttpGet, Route(AuthRoutes.Logout), MyAuthorize]
         public string Logout()
         {
-            var userId = this.GetId();
+            var userId = this.GetUserId();
             return authService.Logout(userId);
         }
     }

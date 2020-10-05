@@ -1,61 +1,47 @@
 ﻿using AutoMapper;
+using COREVUE.Helpers.Attributes;
 using COREVUE.Models.Entities;
-using COREVUE.Repositories;
+using COREVUE.Services;
 using COREVUE.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using static COREVUE.Helpers.Routes;
 
 namespace COREVUE.Controllers
 {
-    [Route(ControllerRoutes.CustomerController), ApiController]
+    [Route(ControllerRoutes.CustomerController), ApiController, MyAuthorize]
     public class CustomerController : ControllerBase
     {
-        private readonly IRepository<Customer> customerRepository;
+        private readonly ICustomerService customerService;
         private readonly IMapper mapper;
 
-        public CustomerController(IRepository<Customer> customerRepository, IMapper mapper)
+        public CustomerController(ICustomerService customerService, IMapper mapper)
         {
-            this.customerRepository = customerRepository;
+            this.customerService = customerService;
             this.mapper = mapper;
         }
 
         [HttpGet, Route(CRUDRoutes.GetAll)]
-        public IEnumerable<Customer> GetAll()
-        {
-            return customerRepository.Get().Include(c => c.User).ToList();
-        }
+        public IEnumerable<Customer> GetAll() => customerService.GetAll();
 
         [HttpGet, Route(CRUDRoutes.GetById)]
-        public Customer GetById(int id)
-        {
-            return customerRepository.Get().Include(c=>c.User).FirstOrDefault(c => c.Id == id);
-        }
+        public Customer GetById(int id) => customerService.GetById(id);
 
         [HttpPost, Route(CRUDRoutes.Create)]
         public void Create(CustomerModel customerModel)
         {
             var customer = mapper.Map<Customer>(customerModel);
-            customerRepository.Create(customer);
+            customerService.Create(customer);
         }
 
         [HttpPut, Route(CRUDRoutes.Update)]
         public void Update(CustomerModel customerModel)
         {
-            var customer = customerRepository.Get().FirstOrDefault(c => c.Id == customerModel.Id);
-            customer = mapper.Map<Customer>(customerModel);
-            customerRepository.Update(customer);
-            customerRepository.Save();
+            var customer = mapper.Map<Customer>(customerModel);
+            customerService.Update(customer);
         }
 
         [HttpDelete, Route(CRUDRoutes.Delete)]
-        public void Delete(int id)
-        {
-            var customer = customerRepository.Get().FirstOrDefault(c => c.Id == id);
-            customerRepository.Delete(customer);
-            customerRepository.Save();
-        }
+        public void Delete(int id) => customerService.Delete(id);
     }
 }

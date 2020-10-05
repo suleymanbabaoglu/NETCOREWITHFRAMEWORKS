@@ -26,7 +26,6 @@ export const routes = [
   },
   {
     path: "/",
-    redirect: "/",
     component: MainLayout,
     children: [
       { path: "/", component: Dashboard, name: "dashboard" },

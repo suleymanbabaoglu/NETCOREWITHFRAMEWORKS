@@ -13,5 +13,6 @@ export const Actions = {
   LOGOUT: "logout",
   LOGIN_BY_REFRESH_TOKEN: "loginByRefreshToken",
   REGISTER: "register",
-  PASSWORD_RESET: "passwordReset"
+  PASSWORD_RESET: "passwordReset",
+  IS_AUTHENTICATED: "isAuthenticated",
 };

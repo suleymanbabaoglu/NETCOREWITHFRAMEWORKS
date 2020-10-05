@@ -7,7 +7,7 @@ namespace COREVUE.Helpers
 {
     public static class ClaimHelper
     {
-        public static int GetId(this ControllerBase controllerBase)
+        public static int GetUserId(this ControllerBase controllerBase)
         {
             var claim = controllerBase.User.Claims.FirstOrDefault(s => s.Type == ClaimTypes.NameIdentifier);
             if (claim == null)
@@ -24,7 +24,7 @@ namespace COREVUE.Helpers
                 return string.Empty;
             return claim.Value;
         }
-        public static int GetId(HttpContext httpContext)
+        public static int GetUserId(HttpContext httpContext)
         {
             if (httpContext == null)
                 return -1;

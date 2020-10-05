@@ -6,7 +6,7 @@
         <b-icon-key-fill
           font-scale="2"
           role="button"
-          @click="deleteUser(data.item.id)"
+          @click="passwordReset(data.item.id)"
         />
       </template>
       <template #cell(actions)="data">
@@ -14,12 +14,20 @@
         <b-icon-trash-fill role="button" @click="deleteUser(data.item.id)" />
       </template>
     </b-table>
+    <b-modal centered v-model="modalComponent.visible" no-close-on-backdrop no-close-on-esc>
+      <component
+        :is="modalComponent.component"
+        v-bind="modalComponent.props"
+        @closeModal="closeModal"
+      />
+    </b-modal>
   </div>
 </template>
 
 <script>
 import BaseActions from "../../store/BaseActions";
 import { ControllerRoutes } from "../../constraints/Routes";
+import PasswordReset from "../../components/User/PasswordReset";
 
 export default {
   data() {
@@ -32,7 +40,12 @@ export default {
         { key: "password", label: "Password" },
         { key: "actions", label: "Actions" }
       ],
-      items: []
+      items: [],
+      modalComponent: {
+        visible: false,
+        component: null,
+        props: []
+      }
     };
   },
   created() {
@@ -48,6 +61,16 @@ export default {
         this.items.indexOf(this.items.find(u => u.id === userId)),
         1
       );
+    },
+    passwordReset(userId) {
+      this.modalComponent = {
+        visible: true,
+        props: { userId: userId },
+        component: PasswordReset
+      };
+    },
+    closeModal() {
+      this.modalComponent.visible = false;
     }
   }
 };
