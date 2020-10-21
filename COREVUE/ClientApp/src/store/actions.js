@@ -19,15 +19,19 @@ export const login = async ({ state }, payload) => {
   }
 };
 
-export const loginByRefreshToken = async ({ state }, { payload }) => {
+export const loginByRefreshToken = async ({ state }) => {
   let response = await new BaseActions("").request(
     "POST",
     AuthRoutes.LoginByRefreshToken(),
-    payload
+    JSON.stringify(getLocalStorage().refreshToken)
   );
   if (response.token !== null) {
-    setLocalStorage(response.token,"",response.tokenExpire);
+    state.isAuthenticated = true;
+    setLocalStorage(response.token, "", response.tokenExpire);
     router.push("/");
+  } else {
+    removeLocalStorage();
+    router.push("/account/login");
   }
 };
 
@@ -66,8 +70,8 @@ export const isAuthenticated = () => {
 function getLocalStorage() {
   return {
     token: localStorage.getItem("token"),
-    refreshToken: localStorage.getItem("tokenExpire"),
-    expire: localStorage.getItem("refreshToken")
+    refreshToken: localStorage.getItem("refreshToken"),
+    expire: localStorage.getItem("tokenExpire")
   };
 }
 

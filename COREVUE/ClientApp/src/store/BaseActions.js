@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Base, CRUDRoutes } from "../constraints/Routes";
-/*import { ErrorConstraints, ReturnConstraints } from "../helpers/Constraints";*/
+import {Actions, ErrorConstraints, ReturnConstraints} from "../constraints/Constraints";
+import {store} from "./store";
 
 export default class BaseActions {
   constructor(controllerRoute) {
@@ -29,9 +30,11 @@ export default class BaseActions {
       });
       return result.data;
     } catch (e) {
-      /* if (e.response !== undefined && e.response.status === 401) {
-                return (await new AccountService().loginByRefreshToken()) ? ReturnConstraints.REFRESH : null;
-            } else throw ErrorConstraints.NETWORK_ERROR;*/
+      if (e.response !== undefined && e.response.status === 401) {
+        return (await store.dispatch(Actions.LOGIN_BY_REFRESH_TOKEN))
+          ? ReturnConstraints.REFRESH
+          : null;
+      } else throw ErrorConstraints.NETWORK_ERROR;
     }
   }
 
@@ -54,10 +57,10 @@ export default class BaseActions {
     );
   }
 
-  async update(model, objectId) {
+  async update(model) {
     return await this.request(
       "PUT",
-      CRUDRoutes.Update(this.controllerRoute, objectId),
+      CRUDRoutes.Update(this.controllerRoute),
       model
     );
   }

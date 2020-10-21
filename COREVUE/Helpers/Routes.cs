@@ -24,6 +24,7 @@
         {
             public const string Register = "register";
             public const string PasswordReset = "passwordReset";
+            public const string GetLoggedInUser = "getLoggedInUser";
         }
         public static class AuthRoutes
         {

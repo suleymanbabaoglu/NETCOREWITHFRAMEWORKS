@@ -20,14 +20,14 @@ export const CRUDRoutes = {
   Create(controller) {
     return controller + "create";
   },
-  Update(controller, objectId) {
-    return controller + `update/${objectId}`;
+  Update(controller) {
+    return controller + "update";
   },
   Delete(controller, objectId) {
     return controller + `delete/${objectId}`;
   },
   GetById(controller, objectId) {
-    return controller + `getById/${objectId}`;
+    return controller + `get/${objectId}`;
   }
 };
 
@@ -37,6 +37,9 @@ export const AccountRoutes = {
   },
   PasswordReset() {
     return Account + "passwordReset";
+  },
+  GetLoggedInUser() {
+    return Account + "getLoggedInUser";
   }
 };
 

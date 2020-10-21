@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using COREVUE.Helpers;
+using COREVUE.Helpers.Attributes;
 using COREVUE.Helpers.Sha512Hash;
 using COREVUE.Models.Entities;
 using COREVUE.Services;
@@ -43,6 +45,13 @@ namespace COREVUE.Controllers
 
                 userService.Update(user);
             }
+        }
+
+        [HttpGet, Route(AccountRoutes.GetLoggedInUser), MyAuthorize]
+        public string LoggedInUser()
+        {
+            var user = userService.GetById(this.GetUserId());
+            return user.FirstName + " " + user.LastName;
         }
     }
 }
