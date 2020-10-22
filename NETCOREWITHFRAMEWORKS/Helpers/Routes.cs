@@ -31,7 +31,12 @@
             public const string Login = "login";
             public const string LoginByRefreshToken = "loginByRefreshToken";
             public const string Logout = "logout";
-
+        }
+        public static class CustomerRoutes
+        {
+            public const string GetProducts = "{customerId:int}/products";
+            public const string AddProduct = "{customerId:int}/add-product/{productId:int}";
+            public const string RemoveProduct = "{customerId:int}/remove-product/{productId:int}";
         }
     }
 }

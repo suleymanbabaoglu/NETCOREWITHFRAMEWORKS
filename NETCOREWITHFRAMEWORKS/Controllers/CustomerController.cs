@@ -6,6 +6,8 @@ using NETCOREWITHFRAMEWORKS.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using static NETCOREWITHFRAMEWORKS.Helpers.Routes;
+using NETCOREWITHFRAMEWORKS.Models.Entities.ManyToMany;
+using System.Linq;
 
 namespace NETCOREWITHFRAMEWORKS.Controllers
 {
@@ -43,5 +45,14 @@ namespace NETCOREWITHFRAMEWORKS.Controllers
 
         [HttpDelete, Route(CRUDRoutes.Delete)]
         public void Delete(int id) => customerService.Delete(id);
+
+        [HttpGet, Route(CustomerRoutes.GetProducts)]
+        public IEnumerable<Customer_Product> GetProducts(int customerId) => customerService.GetProducts(customerId);
+
+        [HttpGet, Route(CustomerRoutes.AddProduct)]
+        public void AddProduct(int customerId, int productId) => customerService.AddProduct(customerId, productId);
+
+        [HttpGet, Route(CustomerRoutes.RemoveProduct)]
+        public void RemoveProduct(int customerId, int productId) => customerService.RemoveProduct(customerId, productId);
     }
 }

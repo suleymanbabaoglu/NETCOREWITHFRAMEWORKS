@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
@@ -14,8 +15,9 @@ namespace NETCOREWITHFRAMEWORKS.Models.Entities.ManyToMany
 
         [ForeignKey("Product")]
         public int ProductId { get; set; }
-
-        [JsonIgnore, IgnoreDataMember]
+        
         public Product Product { get; set; }
+
+        public DateTime PurchaseDate { get; set; }
     }
 }

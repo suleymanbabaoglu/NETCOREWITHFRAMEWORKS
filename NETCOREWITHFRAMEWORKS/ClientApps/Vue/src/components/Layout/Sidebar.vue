@@ -5,6 +5,8 @@
     visible
     no-close-on-route-change
     no-header-close
+    no-close-on-esc
+    no-close-on-backdrop
   >
     <template #title>
       <b-img

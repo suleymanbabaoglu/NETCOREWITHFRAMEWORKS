@@ -3,6 +3,7 @@
     <b-button class="mb-3" variant="primary" @click="create">CREATE</b-button>
     <b-table striped hover :items="items" :fields="fields">
       <template #cell(actions)="data">
+        <b-icon-bag-fill class="mr-3" role="button" @click="products(data.item.id)" />
         <b-icon-pen-fill class="mr-3" role="button" @click="update(data.item.id)" />
         <b-icon-trash-fill
           role="button"
@@ -16,6 +17,7 @@
       no-close-on-backdrop
       no-close-on-esc
       busy
+      :size="modalComponent.size"
     >
       <component
         :is="modalComponent.component"
@@ -33,6 +35,7 @@
 import BaseActions from "../../store/BaseActions";
 import { ControllerRoutes } from "../../constraints/Routes";
 import CreateUpdateForm from "../../components/Customer/CreateUpdateForm";
+import Products from "../../components/Customer/Products";
 
 export default {
   data() {
@@ -49,7 +52,8 @@ export default {
       modalComponent: {
         visible: false,
         component: null,
-        props: []
+        props: [],
+        size:""
       }
     };
   },
@@ -81,6 +85,14 @@ export default {
         1
       );
     },
+    products(customerId){
+      this.modalComponent = {
+        visible: true,
+        props: { customerId: customerId },
+        component: Products,
+        size: "xl"
+      };
+    },
     closeModal() {
       this.modalComponent.visible = false;
       this.initialize();
@@ -88,3 +100,5 @@ export default {
   }
 };
 </script>
+<style scoped>
+</style>

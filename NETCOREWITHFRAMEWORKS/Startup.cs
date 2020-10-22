@@ -16,14 +16,20 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using VueCliMiddleware;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 namespace NETCOREWITHFRAMEWORKS
 {
     public class Startup
     {
+        private enum ClientApp
+        {
+            Angular, Vue
+        }
+        private ClientApp client;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration;            
         }
 
         public IConfiguration Configuration { get; }
@@ -57,7 +63,26 @@ namespace NETCOREWITHFRAMEWORKS
                });
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp";
+                //Experimental
+                char key;
+                do
+                {
+                    Console.WriteLine("Please Select a Client App. (Angular: A-a, Vue: V-v)\n");
+                    key = Console.ReadKey().KeyChar;
+                    Console.WriteLine("\n");
+
+                } while (key != 'A' && key != 'a' && key != 'V' && key != 'v');
+
+                if (key.Equals('A') || key.Equals('a'))
+                    client = ClientApp.Angular;
+
+                if (key.Equals('V') || key.Equals('v'))
+                    client = ClientApp.Vue;
+
+                if (client == ClientApp.Angular)
+                    configuration.RootPath = "ClientApps/Angular/dist";
+                if (client == ClientApp.Vue)
+                    configuration.RootPath = "ClientApps/Vue";
             });
 
             services.AddDbContext<DBContext>();
@@ -127,14 +152,25 @@ namespace NETCOREWITHFRAMEWORKS
 
             app.UseSpa(spa =>
             {
-                if (env.IsDevelopment())
-                    spa.Options.SourcePath = "ClientApp";
-                else
-                    spa.Options.SourcePath = "dist";
-
-                if (env.IsDevelopment())
+                if (client == ClientApp.Vue)
                 {
-                    spa.UseVueCli(npmScript: "serve");
+                    if (env.IsDevelopment())
+                    {
+                        spa.Options.SourcePath = "ClientApps/Vue";
+                        spa.UseVueCli(npmScript: "serve", port: 8080);
+                    }
+                    else
+                        spa.Options.SourcePath = "dist";
+                }
+
+                if (client == ClientApp.Angular)
+                {
+                    spa.Options.SourcePath = "ClientApps/Angular";
+
+                    if (env.IsDevelopment())
+                    {
+                        spa.UseAngularCliServer(npmScript: "start");
+                    }
                 }
 
             });

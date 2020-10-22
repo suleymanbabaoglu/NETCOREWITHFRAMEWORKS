@@ -54,3 +54,15 @@ export const AuthRoutes = {
     return Authentication + "logout";
   }
 };
+
+export const CustomerRoutes = {
+  GetProducts(customerId) {
+    return Customer + `${customerId}/products`;
+  },
+  AddProduct(customerId,productId) {
+    return Customer + `${customerId}/add-product/${productId}`;
+  },
+  RemoveProduct(customerId,productId) {
+    return Customer + `${customerId}/remove-product/${productId}`;
+  },
+};

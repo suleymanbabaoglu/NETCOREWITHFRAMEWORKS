@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace NETCOREWITHFRAMEWORKS.Models.Entities
 {
@@ -16,6 +17,7 @@ namespace NETCOREWITHFRAMEWORKS.Models.Entities
         public string Brand { get; set; }
         public string SerialNumber { get; set; }
 
+        [JsonIgnore, IgnoreDataMember]
         public ICollection<Customer_Product> Customer_Products { get; set; }
     }
 }
