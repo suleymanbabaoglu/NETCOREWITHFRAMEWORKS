@@ -1,12 +1,12 @@
-﻿using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Repositories;
+﻿using SAMPLE.Models.Entities;
+using SAMPLE.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using NETCOREWITHFRAMEWORKS.Models.Entities.ManyToMany;
+using SAMPLE.Models.Entities.ManyToMany;
 using System;
 
-namespace NETCOREWITHFRAMEWORKS.Services
+namespace SAMPLE.Services
 {
     public class CustomerService : ICustomerService
     {
@@ -57,5 +57,7 @@ namespace NETCOREWITHFRAMEWORKS.Services
                 customerProductRepository.Save();
             }
         }
+
+        public int Count() => customerRepository.Table.Count();
     }
 }

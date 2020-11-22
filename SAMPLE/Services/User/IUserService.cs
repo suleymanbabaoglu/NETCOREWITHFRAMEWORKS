@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using NETCOREWITHFRAMEWORKS.Models.Entities;
+using SAMPLE.Models.Entities;
 
-namespace NETCOREWITHFRAMEWORKS.Services
+namespace SAMPLE.Services
 {
     public interface IUserService
     {
@@ -10,6 +10,7 @@ namespace NETCOREWITHFRAMEWORKS.Services
         public void Create(User user);
         public void Update(User user);
         public void Delete(int id);
+        public int Count();
 
     }
 }

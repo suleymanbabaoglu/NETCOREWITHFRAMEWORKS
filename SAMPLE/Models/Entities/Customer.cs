@@ -1,4 +1,4 @@
-﻿using NETCOREWITHFRAMEWORKS.Models.Entities.ManyToMany;
+﻿using SAMPLE.Models.Entities.ManyToMany;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NETCOREWITHFRAMEWORKS.Models.Entities
+namespace SAMPLE.Models.Entities
 {
     [JsonObject(IsReference = true)]
     public class Customer

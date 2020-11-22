@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using System;
 
-namespace NETCOREWITHFRAMEWORKS.Helpers.Attributes
+namespace SAMPLE.Helpers.Attributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     public class MyAuthorizeAttribute : AuthorizeAttribute

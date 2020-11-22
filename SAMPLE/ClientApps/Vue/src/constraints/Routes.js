@@ -4,16 +4,18 @@ const Account = Base + "account/";
 const Customer = Base + "customer/";
 const Product = Base + "product/";
 const User = Base + "user/";
+const Settings = Base + "settings/";
 
 export const ControllerRoutes = {
   Account: Account,
   Authentication: Authentication,
   Customer: Customer,
   Product: Product,
-  User: User
+  User: User,
+  Settings: Settings,
 };
 
-export const CRUDRoutes = {
+export const GeneralRoutes = {
   GetAll(controller) {
     return controller + "getAll";
   },
@@ -28,7 +30,10 @@ export const CRUDRoutes = {
   },
   GetById(controller, objectId) {
     return controller + `get/${objectId}`;
-  }
+  },
+  Count(controller) {
+    return controller + "count";
+  },
 };
 
 export const AccountRoutes = {
@@ -40,7 +45,7 @@ export const AccountRoutes = {
   },
   GetLoggedInUser() {
     return Account + "getLoggedInUser";
-  }
+  },
 };
 
 export const AuthRoutes = {
@@ -52,17 +57,23 @@ export const AuthRoutes = {
   },
   Logout() {
     return Authentication + "logout";
-  }
+  },
 };
 
 export const CustomerRoutes = {
   GetProducts(customerId) {
     return Customer + `${customerId}/products`;
   },
-  AddProduct(customerId,productId) {
+  AddProduct(customerId, productId) {
     return Customer + `${customerId}/add-product/${productId}`;
   },
-  RemoveProduct(customerId,productId) {
+  RemoveProduct(customerId, productId) {
     return Customer + `${customerId}/remove-product/${productId}`;
+  },
+};
+
+export const SettingsRoutes = {
+  Get() {
+    return Settings + "get";
   },
 };

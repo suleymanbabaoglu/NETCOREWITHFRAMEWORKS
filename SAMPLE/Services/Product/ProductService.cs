@@ -1,9 +1,9 @@
-﻿using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Repositories;
+﻿using SAMPLE.Models.Entities;
+using SAMPLE.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NETCOREWITHFRAMEWORKS.Services
+namespace SAMPLE.Services
 {
     public class ProductService : IProductService
     {
@@ -17,7 +17,7 @@ namespace NETCOREWITHFRAMEWORKS.Services
         public Product GetById(int id) => productRepository.Get(u => u.Id == id);
         public void Create(Product product)
         {
-            
+
             productRepository.Create(product);
             productRepository.Save();
         }
@@ -32,5 +32,8 @@ namespace NETCOREWITHFRAMEWORKS.Services
             productRepository.Delete(product);
             productRepository.Save();
         }
+
+        public int Count() => productRepository.Table.Count();
+
     }
 }

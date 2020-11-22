@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace NETCOREWITHFRAMEWORKS.Repositories
+namespace SAMPLE.Repositories
 {
     public interface IRepository<T> where T : class
     {

@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using NETCOREWITHFRAMEWORKS.Helpers;
-using NETCOREWITHFRAMEWORKS.Helpers.Attributes;
-using NETCOREWITHFRAMEWORKS.Helpers.Sha512Hash;
-using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Services;
-using NETCOREWITHFRAMEWORKS.ViewModels;
+using SAMPLE.Helpers;
+using SAMPLE.Helpers.Attributes;
+using SAMPLE.Helpers.Sha512Hash;
+using SAMPLE.Models.Entities;
+using SAMPLE.Services;
+using SAMPLE.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using static NETCOREWITHFRAMEWORKS.Helpers.Routes;
+using static SAMPLE.Helpers.Routes;
 
-namespace NETCOREWITHFRAMEWORKS.Controllers
+namespace SAMPLE.Controllers
 {
     [Route(ControllerRoutes.AccountController), ApiController]
     public class AccountController : ControllerBase

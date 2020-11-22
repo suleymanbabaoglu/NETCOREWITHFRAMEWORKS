@@ -1,8 +1,8 @@
-﻿using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Models.Entities.ManyToMany;
+﻿using SAMPLE.Models.Entities;
+using SAMPLE.Models.Entities.ManyToMany;
 using System.Collections.Generic;
 
-namespace NETCOREWITHFRAMEWORKS.Services
+namespace SAMPLE.Services
 {
     public interface ICustomerService
     {
@@ -14,6 +14,7 @@ namespace NETCOREWITHFRAMEWORKS.Services
         public IEnumerable<Customer_Product> GetProducts(int customerId);
         public void AddProduct(int customerId, int productId);
         public void RemoveProduct(int customerId, int productId);
+        public int Count();
 
     }
 }

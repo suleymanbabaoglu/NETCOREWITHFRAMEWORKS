@@ -1,10 +1,10 @@
-﻿using NETCOREWITHFRAMEWORKS.Helpers.Sha512Hash;
-using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Repositories;
+﻿using SAMPLE.Helpers.Sha512Hash;
+using SAMPLE.Models.Entities;
+using SAMPLE.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NETCOREWITHFRAMEWORKS.Services
+namespace SAMPLE.Services
 {
     public class UserService : IUserService
     {
@@ -34,5 +34,7 @@ namespace NETCOREWITHFRAMEWORKS.Services
             userRepository.Delete(user);
             userRepository.Save();
         }
+
+        public int Count() => userRepository.Table.Count();
     }
 }

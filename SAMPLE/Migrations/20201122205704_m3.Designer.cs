@@ -9,8 +9,8 @@ using SAMPLE.Models;
 namespace SAMPLE.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20201022195218_m2")]
-    partial class m2
+    [Migration("20201122205704_m3")]
+    partial class m3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,6 +82,39 @@ namespace SAMPLE.Migrations
                             Brand = "Demo Brand",
                             Name = "Demo Product",
                             SerialNumber = "SN112233"
+                        });
+                });
+
+            modelBuilder.Entity("SAMPLE.Models.Entities.Settings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClientApp")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NavbarVariant")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SidebarVariant")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Settings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClientApp = 1,
+                            NavbarVariant = 1,
+                            SidebarVariant = 1,
+                            Title = "DOT NET CORE WITH FRAMEWORKS DEMO TITLE"
                         });
                 });
 

@@ -1,8 +1,8 @@
-﻿using NETCOREWITHFRAMEWORKS.Repositories;
+﻿using SAMPLE.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using static NETCOREWITHFRAMEWORKS.Helpers.Routes;
+using static SAMPLE.Helpers.Routes;
 
-namespace NETCOREWITHFRAMEWORKS.Controllers
+namespace SAMPLE.Controllers
 {
     [Route(ControllerRoutes.MainController), ApiController]
     public class MainController : ControllerBase

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.ViewModels;
+using SAMPLE.Models.Entities;
+using SAMPLE.ViewModels;
 
-namespace NETCOREWITHFRAMEWORKS.Helpers
+namespace SAMPLE.Helpers
 {
     public class AutoMapping : Profile
     {
@@ -11,6 +11,7 @@ namespace NETCOREWITHFRAMEWORKS.Helpers
             CreateMap<CustomerModel, Customer>();
             CreateMap<ProductModel, Product>();
             CreateMap<UserModel, User>();
+            CreateMap<SettingsModel, Settings>();
         }
     }
 }

@@ -1,8 +1,8 @@
 using AutoMapper;
-using NETCOREWITHFRAMEWORKS.Models;
-using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Repositories;
-using NETCOREWITHFRAMEWORKS.Services;
+using SAMPLE.Models;
+using SAMPLE.Models.Entities;
+using SAMPLE.Repositories;
+using SAMPLE.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 using VueCliMiddleware;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 
-namespace NETCOREWITHFRAMEWORKS
+namespace SAMPLE
 {
     public class Startup
     {
@@ -29,7 +29,7 @@ namespace NETCOREWITHFRAMEWORKS
         private ClientApp client;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;            
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -63,22 +63,8 @@ namespace NETCOREWITHFRAMEWORKS
                });
             services.AddSpaStaticFiles(configuration =>
             {
-                //Experimental
-                char key;
-                do
-                {
-                    Console.WriteLine("Please Select a Client App. (Angular: A-a, Vue: V-v)\n");
-                    key = Console.ReadKey().KeyChar;
-                    Console.WriteLine("\n");
-
-                } while (key != 'A' && key != 'a' && key != 'V' && key != 'v');
-
-                if (key.Equals('A') || key.Equals('a'))
-                    client = ClientApp.Angular;
-
-                if (key.Equals('V') || key.Equals('v'))
-                    client = ClientApp.Vue;
-
+                var stRepo = new Repository<Settings>(new DBContext(Configuration));
+                client = stRepo.Get().Select(s => s.ClientApp).FirstOrDefault() == 1 ? ClientApp.Vue : ClientApp.Angular;
                 if (client == ClientApp.Angular)
                     configuration.RootPath = "ClientApps/Angular/dist";
                 if (client == ClientApp.Vue)
@@ -91,6 +77,7 @@ namespace NETCOREWITHFRAMEWORKS
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISettingsService, SettingsService>();
 
             services.AddAutoMapper(typeof(Startup));
         }

@@ -1,11 +1,11 @@
-﻿using NETCOREWITHFRAMEWORKS.Models;
+﻿using SAMPLE.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace NETCOREWITHFRAMEWORKS.Repositories
+namespace SAMPLE.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {

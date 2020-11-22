@@ -3,9 +3,9 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NETCOREWITHFRAMEWORKS.Models;
+using SAMPLE.Models;
 
-namespace NETCOREWITHFRAMEWORKS.Migrations
+namespace SAMPLE.Migrations
 {
     [DbContext(typeof(DBContext))]
     partial class DBContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace NETCOREWITHFRAMEWORKS.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("NETCOREWITHFRAMEWORKS.Models.Entities.Customer", b =>
+            modelBuilder.Entity("SAMPLE.Models.Entities.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,7 +36,7 @@ namespace NETCOREWITHFRAMEWORKS.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("NETCOREWITHFRAMEWORKS.Models.Entities.ManyToMany.Customer_Product", b =>
+            modelBuilder.Entity("SAMPLE.Models.Entities.ManyToMany.Customer_Product", b =>
                 {
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
@@ -54,7 +54,7 @@ namespace NETCOREWITHFRAMEWORKS.Migrations
                     b.ToTable("Customer_Products");
                 });
 
-            modelBuilder.Entity("NETCOREWITHFRAMEWORKS.Models.Entities.Product", b =>
+            modelBuilder.Entity("SAMPLE.Models.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,7 +83,40 @@ namespace NETCOREWITHFRAMEWORKS.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NETCOREWITHFRAMEWORKS.Models.Entities.User", b =>
+            modelBuilder.Entity("SAMPLE.Models.Entities.Settings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClientApp")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NavbarVariant")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SidebarVariant")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Settings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClientApp = 1,
+                            NavbarVariant = 1,
+                            SidebarVariant = 1,
+                            Title = "DOT NET CORE WITH FRAMEWORKS DEMO TITLE"
+                        });
+                });
+
+            modelBuilder.Entity("SAMPLE.Models.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,24 +160,24 @@ namespace NETCOREWITHFRAMEWORKS.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("NETCOREWITHFRAMEWORKS.Models.Entities.Customer", b =>
+            modelBuilder.Entity("SAMPLE.Models.Entities.Customer", b =>
                 {
-                    b.HasOne("NETCOREWITHFRAMEWORKS.Models.Entities.User", "User")
+                    b.HasOne("SAMPLE.Models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("NETCOREWITHFRAMEWORKS.Models.Entities.ManyToMany.Customer_Product", b =>
+            modelBuilder.Entity("SAMPLE.Models.Entities.ManyToMany.Customer_Product", b =>
                 {
-                    b.HasOne("NETCOREWITHFRAMEWORKS.Models.Entities.Customer", "Customer")
+                    b.HasOne("SAMPLE.Models.Entities.Customer", "Customer")
                         .WithMany("Customer_Products")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NETCOREWITHFRAMEWORKS.Models.Entities.Product", "Product")
+                    b.HasOne("SAMPLE.Models.Entities.Product", "Product")
                         .WithMany("Customer_Products")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)

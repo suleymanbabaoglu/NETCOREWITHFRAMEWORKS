@@ -1,4 +1,4 @@
-﻿namespace NETCOREWITHFRAMEWORKS.ViewModels
+﻿namespace SAMPLE.ViewModels
 {
     public class AuthModel
     {

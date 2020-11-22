@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
-namespace NETCOREWITHFRAMEWORKS.Models.Entities
+namespace SAMPLE.Models.Entities
 {
     [JsonObject(IsReference = true)]
     public class User

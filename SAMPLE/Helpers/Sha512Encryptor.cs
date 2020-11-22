@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace NETCOREWITHFRAMEWORKS.Helpers.Sha512Hash
+namespace SAMPLE.Helpers.Sha512Hash
 {
 
     public class Sha512Encryptor

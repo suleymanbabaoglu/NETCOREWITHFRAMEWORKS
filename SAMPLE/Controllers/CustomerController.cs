@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using NETCOREWITHFRAMEWORKS.Helpers.Attributes;
-using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Services;
-using NETCOREWITHFRAMEWORKS.ViewModels;
+using SAMPLE.Helpers.Attributes;
+using SAMPLE.Models.Entities;
+using SAMPLE.Services;
+using SAMPLE.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using static NETCOREWITHFRAMEWORKS.Helpers.Routes;
-using NETCOREWITHFRAMEWORKS.Models.Entities.ManyToMany;
+using static SAMPLE.Helpers.Routes;
+using SAMPLE.Models.Entities.ManyToMany;
 using System.Linq;
 
-namespace NETCOREWITHFRAMEWORKS.Controllers
+namespace SAMPLE.Controllers
 {
     [Route(ControllerRoutes.CustomerController), ApiController, MyAuthorize]
     public class CustomerController : ControllerBase
@@ -23,27 +23,27 @@ namespace NETCOREWITHFRAMEWORKS.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet, Route(CRUDRoutes.GetAll)]
+        [HttpGet, Route(GeneralRoutes.GetAll)]
         public IEnumerable<Customer> GetAll() => customerService.GetAll();
 
-        [HttpGet, Route(CRUDRoutes.GetById)]
+        [HttpGet, Route(GeneralRoutes.GetById)]
         public Customer GetById(int id) => customerService.GetById(id);
 
-        [HttpPost, Route(CRUDRoutes.Create)]
+        [HttpPost, Route(GeneralRoutes.Create)]
         public void Create(CustomerModel customerModel)
         {
             var customer = mapper.Map<Customer>(customerModel);
             customerService.Create(customer);
         }
 
-        [HttpPut, Route(CRUDRoutes.Update)]
+        [HttpPut, Route(GeneralRoutes.Update)]
         public void Update(CustomerModel customerModel)
         {
             var customer = mapper.Map<Customer>(customerModel);
             customerService.Update(customer);
         }
 
-        [HttpDelete, Route(CRUDRoutes.Delete)]
+        [HttpDelete, Route(GeneralRoutes.Delete)]
         public void Delete(int id) => customerService.Delete(id);
 
         [HttpGet, Route(CustomerRoutes.GetProducts)]
@@ -54,5 +54,10 @@ namespace NETCOREWITHFRAMEWORKS.Controllers
 
         [HttpGet, Route(CustomerRoutes.RemoveProduct)]
         public void RemoveProduct(int customerId, int productId) => customerService.RemoveProduct(customerId, productId);
+
+
+        [HttpGet, Route(GeneralRoutes.Count)]
+        public int Count() => customerService.Count();
+
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace NETCOREWITHFRAMEWORKS.Models.Entities.ManyToMany
+namespace SAMPLE.Models.Entities.ManyToMany
 {
     public class Customer_Product
     {

@@ -1,6 +1,6 @@
 <template>
   <b-sidebar
-    bg-variant="dark"
+    :bg-variant="variant"
     shadow
     visible
     no-close-on-route-change
@@ -25,6 +25,11 @@
     </b-navbar-nav>
   </b-sidebar>
 </template>
+<script>
+export default {
+  props: ["variant"],
+};
+</script>
 <style>
 .b-sidebar {
   width: 200px !important;
@@ -34,7 +39,7 @@
 }
 .nav-link:hover {
   font-weight: bold;
-  color: #563D7C;
-  background-color: #41B883;
+  color: #563d7c;
+  background-color: #41b883;
 }
 </style>

@@ -1,6 +1,6 @@
-﻿using NETCOREWITHFRAMEWORKS.Helpers.Sha512Hash;
-using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Repositories;
+﻿using SAMPLE.Helpers.Sha512Hash;
+using SAMPLE.Models.Entities;
+using SAMPLE.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 
-namespace NETCOREWITHFRAMEWORKS.Services
+namespace SAMPLE.Services
 {
     public class AuthService : IAuthService
     {

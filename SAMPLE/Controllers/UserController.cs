@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using NETCOREWITHFRAMEWORKS.Helpers.Attributes;
-using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Repositories;
-using NETCOREWITHFRAMEWORKS.Services;
-using NETCOREWITHFRAMEWORKS.ViewModels;
+using SAMPLE.Helpers.Attributes;
+using SAMPLE.Models.Entities;
+using SAMPLE.Repositories;
+using SAMPLE.Services;
+using SAMPLE.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using static NETCOREWITHFRAMEWORKS.Helpers.Routes;
+using static SAMPLE.Helpers.Routes;
 
-namespace NETCOREWITHFRAMEWORKS.Controllers
+namespace SAMPLE.Controllers
 {
     [Route(ControllerRoutes.UserController), ApiController, MyAuthorize]
     public class UserController : ControllerBase
@@ -19,17 +19,17 @@ namespace NETCOREWITHFRAMEWORKS.Controllers
 
         public UserController(IUserService userService, IMapper mapper)
         {
-            this.userService = userService;           
+            this.userService = userService;
             this.mapper = mapper;
         }
 
-        [HttpGet, Route(CRUDRoutes.GetAll)]
+        [HttpGet, Route(GeneralRoutes.GetAll)]
         public IEnumerable<User> GetAll() => userService.GetAll();
 
-        [HttpGet, Route(CRUDRoutes.GetById)]
+        [HttpGet, Route(GeneralRoutes.GetById)]
         public User GetById(int id) => userService.GetById(id);
 
-        [HttpPost, Route(CRUDRoutes.Create)]
+        [HttpPost, Route(GeneralRoutes.Create)]
         public void Create(UserModel userModel)
         {
             if (ModelState.IsValid)
@@ -39,7 +39,7 @@ namespace NETCOREWITHFRAMEWORKS.Controllers
             }
         }
 
-        [HttpPut, Route(CRUDRoutes.Update)]
+        [HttpPut, Route(GeneralRoutes.Update)]
         public void Update(UserModel userModel)
         {
             var user = userService.GetById(userModel.Id);
@@ -47,7 +47,10 @@ namespace NETCOREWITHFRAMEWORKS.Controllers
             userService.Update(user);
         }
 
-        [HttpDelete, Route(CRUDRoutes.Delete)]
+        [HttpDelete, Route(GeneralRoutes.Delete)]
         public void Delete(int id) => userService.Delete(id);
+
+        [HttpGet, Route(GeneralRoutes.Count)]
+        public int Count() => userService.Count();
     }
 }

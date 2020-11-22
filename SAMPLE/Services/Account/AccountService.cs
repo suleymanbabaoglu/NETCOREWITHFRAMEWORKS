@@ -1,7 +1,7 @@
-﻿using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Repositories;
+﻿using SAMPLE.Models.Entities;
+using SAMPLE.Repositories;
 
-namespace NETCOREWITHFRAMEWORKS.Services
+namespace SAMPLE.Services
 {
     public class AccountService : IAccountService
     {

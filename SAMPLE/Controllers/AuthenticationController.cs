@@ -1,13 +1,13 @@
-﻿using NETCOREWITHFRAMEWORKS.Helpers;
-using NETCOREWITHFRAMEWORKS.Helpers.Attributes;
-using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Services;
-using NETCOREWITHFRAMEWORKS.ViewModels;
+﻿using SAMPLE.Helpers;
+using SAMPLE.Helpers.Attributes;
+using SAMPLE.Models.Entities;
+using SAMPLE.Services;
+using SAMPLE.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static NETCOREWITHFRAMEWORKS.Helpers.Routes;
+using static SAMPLE.Helpers.Routes;
 
-namespace NETCOREWITHFRAMEWORKS.Controllers
+namespace SAMPLE.Controllers
 {
     [Route(ControllerRoutes.AuthenticationController), ApiController]
     public class AuthenticationController : ControllerBase

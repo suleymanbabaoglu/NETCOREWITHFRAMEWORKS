@@ -1,7 +1,7 @@
-﻿using NETCOREWITHFRAMEWORKS.Models.Entities;
+﻿using SAMPLE.Models.Entities;
 using System.Collections.Generic;
 
-namespace NETCOREWITHFRAMEWORKS.Services
+namespace SAMPLE.Services
 {
     public interface IProductService
     {
@@ -10,6 +10,7 @@ namespace NETCOREWITHFRAMEWORKS.Services
         public void Create(Product product);
         public void Update(Product product);
         public void Delete(int id);
+        public int Count();
 
     }
 }

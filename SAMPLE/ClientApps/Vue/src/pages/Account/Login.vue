@@ -130,8 +130,8 @@ export default {
   data() {
     return {
       form: {
-        email: "",
-        password: ""
+        email: "admin@admin.admin",
+        password: "1"
       }
     };
   },

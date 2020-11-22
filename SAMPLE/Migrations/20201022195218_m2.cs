@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NETCOREWITHFRAMEWORKS.Migrations
+namespace SAMPLE.Migrations
 {
     public partial class m2 : Migration
     {

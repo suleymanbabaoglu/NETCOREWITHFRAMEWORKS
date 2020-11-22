@@ -1,6 +1,6 @@
-﻿using NETCOREWITHFRAMEWORKS.Models.Entities;
+﻿using SAMPLE.Models.Entities;
 
-namespace NETCOREWITHFRAMEWORKS.Services
+namespace SAMPLE.Services
 {
     public interface IAuthService
     {

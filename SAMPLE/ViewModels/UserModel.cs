@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace NETCOREWITHFRAMEWORKS.ViewModels
+namespace SAMPLE.ViewModels
 {
     public class UserModel
     {

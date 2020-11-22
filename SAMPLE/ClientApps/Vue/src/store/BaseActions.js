@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Base, CRUDRoutes } from "../constraints/Routes";
+import { Base, GeneralRoutes } from "../constraints/Routes";
 import {Actions, ErrorConstraints, ReturnConstraints} from "../constraints/Constraints";
 import {store} from "./store";
 
@@ -41,18 +41,18 @@ export default class BaseActions {
   async getById(objectId) {
     return await this.request(
       "GET",
-      CRUDRoutes.GetById(this.controllerRoute, objectId)
+      GeneralRoutes.GetById(this.controllerRoute, objectId)
     );
   }
 
   async getAll() {
-    return await this.request("GET", CRUDRoutes.GetAll(this.controllerRoute));
+    return await this.request("GET", GeneralRoutes.GetAll(this.controllerRoute));
   }
 
   async create(model) {
     return await this.request(
       "POST",
-      CRUDRoutes.Create(this.controllerRoute),
+      GeneralRoutes.Create(this.controllerRoute),
       model
     );
   }
@@ -60,7 +60,7 @@ export default class BaseActions {
   async update(model) {
     return await this.request(
       "PUT",
-      CRUDRoutes.Update(this.controllerRoute),
+      GeneralRoutes.Update(this.controllerRoute),
       model
     );
   }
@@ -68,7 +68,14 @@ export default class BaseActions {
   async delete(objectId) {
     return await this.request(
       "DELETE",
-      CRUDRoutes.Delete(this.controllerRoute, objectId)
+      GeneralRoutes.Delete(this.controllerRoute, objectId)
+    );
+  }
+
+  async count() {
+    return await this.request(
+        "GET",
+        GeneralRoutes.Count(this.controllerRoute)
     );
   }
 }

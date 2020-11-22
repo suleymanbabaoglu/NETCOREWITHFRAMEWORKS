@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using NETCOREWITHFRAMEWORKS.Helpers.Attributes;
-using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Services;
-using NETCOREWITHFRAMEWORKS.ViewModels;
+using SAMPLE.Helpers.Attributes;
+using SAMPLE.Models.Entities;
+using SAMPLE.Services;
+using SAMPLE.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using static NETCOREWITHFRAMEWORKS.Helpers.Routes;
+using static SAMPLE.Helpers.Routes;
 
-namespace NETCOREWITHFRAMEWORKS.Controllers
+namespace SAMPLE.Controllers
 {
     [Route(ControllerRoutes.ProductController), ApiController, MyAuthorize]
     public class ProductController : ControllerBase
@@ -21,27 +21,30 @@ namespace NETCOREWITHFRAMEWORKS.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet, Route(CRUDRoutes.GetAll)]
+        [HttpGet, Route(GeneralRoutes.GetAll)]
         public IEnumerable<Product> GetAll() => productService.GetAll();
 
-        [HttpGet, Route(CRUDRoutes.GetById)]
+        [HttpGet, Route(GeneralRoutes.GetById)]
         public Product GetById(int id) => productService.GetById(id);
 
-        [HttpPost, Route(CRUDRoutes.Create)]
+        [HttpPost, Route(GeneralRoutes.Create)]
         public void Create(ProductModel productModel)
         {
             var product = mapper.Map(productModel, new Product());
             productService.Create(product);
         }
 
-        [HttpPut, Route(CRUDRoutes.Update)]
+        [HttpPut, Route(GeneralRoutes.Update)]
         public void Update(ProductModel productModel)
         {
             var product = mapper.Map(productModel, new Product());
             productService.Update(product);
         }
 
-        [HttpDelete, Route(CRUDRoutes.Delete)]
+        [HttpDelete, Route(GeneralRoutes.Delete)]
         public void Delete(int id) => productService.Delete(id);
+
+        [HttpGet, Route(GeneralRoutes.Count)]
+        public int Count() => productService.Count();
     }
 }

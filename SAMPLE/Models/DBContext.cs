@@ -1,9 +1,9 @@
-﻿using NETCOREWITHFRAMEWORKS.Models.Entities;
-using NETCOREWITHFRAMEWORKS.Models.Entities.ManyToMany;
+﻿using SAMPLE.Models.Entities;
+using SAMPLE.Models.Entities.ManyToMany;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace NETCOREWITHFRAMEWORKS.Models
+namespace SAMPLE.Models
 {
     public class DBContext : DbContext
     {
@@ -12,6 +12,7 @@ namespace NETCOREWITHFRAMEWORKS.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Settings> Settings { get; set; }
 
         public DbSet<Customer_Product> Customer_Products { get; set; }
 
@@ -34,7 +35,16 @@ namespace NETCOREWITHFRAMEWORKS.Models
         }
         private void DefaultDatas(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Settings>()
+               .HasData(
+               new Settings
+               {
+                   Id = 1,
+                   ClientApp = 1,
+                   Title = "DOT NET CORE WITH FRAMEWORKS DEMO TITLE",
+                   NavbarVariant = 1,
+                   SidebarVariant = 1
+               });
             modelBuilder.Entity<Product>()
                 .HasData(
                 new Product

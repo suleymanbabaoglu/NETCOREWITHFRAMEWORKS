@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Security.Claims;
 
-namespace NETCOREWITHFRAMEWORKS.Helpers
+namespace SAMPLE.Helpers
 {
     public static class ClaimHelper
     {
