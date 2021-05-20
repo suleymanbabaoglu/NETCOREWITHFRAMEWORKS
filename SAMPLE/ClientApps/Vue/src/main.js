@@ -12,6 +12,9 @@ import { Actions } from "./constraints/Constraints";
 import BaseActions from "./store/BaseActions";
 import { ControllerRoutes, SettingsRoutes } from "./constraints/Routes";
 
+import JsonExcel from 'vue-json-excel'
+
+Vue.component('downloadExcel', JsonExcel)
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(Axios, VueAxios);

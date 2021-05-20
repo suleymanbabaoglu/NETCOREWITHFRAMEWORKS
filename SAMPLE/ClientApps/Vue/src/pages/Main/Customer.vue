@@ -1,6 +1,10 @@
 <template>
   <div>
     <b-button class="mb-3" variant="primary" @click="create">CREATE</b-button>
+    <download-excel
+            :data   = "items" :fields="fields">
+      <template><b-button class="mb-3 ml-3" variant="success"><b-icon-table></b-icon-table></b-button></template>
+    </download-excel>
     <b-table striped hover :items="items" :fields="fields">
       <template #cell(actions)="data">
         <b-icon-bag-fill class="mr-3" role="button" @click="products(data.item.id)" />
@@ -36,6 +40,7 @@ import BaseActions from "../../store/BaseActions";
 import { ControllerRoutes } from "../../constraints/Routes";
 import CreateUpdateForm from "../../components/Customer/CreateUpdateForm";
 import Products from "../../components/Customer/Products";
+import {toExcel} from "../../store/actions";
 
 export default {
   data() {
@@ -70,6 +75,9 @@ export default {
         props: { create: true },
         component: CreateUpdateForm
       };
+    },
+    toExcel() {
+       toExcel(this.fields,this.items);
     },
     update(customerId) {
       this.modalComponent = {

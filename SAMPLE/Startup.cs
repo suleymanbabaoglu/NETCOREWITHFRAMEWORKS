@@ -22,11 +22,6 @@ namespace SAMPLE
 {
     public class Startup
     {
-        private enum ClientApp
-        {
-            Angular, Vue
-        }
-        private ClientApp client;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -63,12 +58,7 @@ namespace SAMPLE
                });
             services.AddSpaStaticFiles(configuration =>
             {
-                var stRepo = new Repository<Settings>(new DBContext(Configuration));
-                client = stRepo.Get().Select(s => s.ClientApp).FirstOrDefault() == 1 ? ClientApp.Vue : ClientApp.Angular;
-                if (client == ClientApp.Angular)
-                    configuration.RootPath = "ClientApps/Angular/dist";
-                if (client == ClientApp.Vue)
-                    configuration.RootPath = "ClientApps/Vue";
+                configuration.RootPath = "ClientApps/Vue";
             });
 
             services.AddDbContext<DBContext>();
@@ -139,27 +129,13 @@ namespace SAMPLE
 
             app.UseSpa(spa =>
             {
-                if (client == ClientApp.Vue)
+                if (env.IsDevelopment())
                 {
-                    if (env.IsDevelopment())
-                    {
-                        spa.Options.SourcePath = "ClientApps/Vue";
-                        spa.UseVueCli(npmScript: "serve", port: 8080);
-                    }
-                    else
-                        spa.Options.SourcePath = "dist";
+                    spa.Options.SourcePath = "ClientApps/Vue";
+                    spa.UseVueCli(npmScript: "serve", port: 8080);
                 }
-
-                if (client == ClientApp.Angular)
-                {
-                    spa.Options.SourcePath = "ClientApps/Angular";
-
-                    if (env.IsDevelopment())
-                    {
-                        spa.UseAngularCliServer(npmScript: "start");
-                    }
-                }
-
+                else
+                    spa.Options.SourcePath = "dist";
             });
         }
     }

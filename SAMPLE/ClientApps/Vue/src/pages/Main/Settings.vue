@@ -16,22 +16,7 @@
         >
           <b-form-input id="nested-title" required v-model="settings.title" />
         </b-form-group>
-
-        <b-form-group
-          label-cols-sm="3"
-          label="Client App :"
-          label-align-sm="left"
-          label-for="nested-nav-var"
-        >
-          <b-form-select
-            v-model="settings.clientApp"
-            :options="clientApps"
-            value-field="key"
-            text-field="value"
-            required
-          />
-        </b-form-group>
-
+        
         <b-form-group
           label-cols-sm="3"
           label="Navbar Variant :"
