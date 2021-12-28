@@ -127,16 +127,16 @@ namespace SAMPLE
                 endpoints.MapControllers();
             });
 
-            app.UseSpa(spa =>
-            {
-                if (env.IsDevelopment())
-                {
-                    spa.Options.SourcePath = "ClientApps/Vue";
-                    spa.UseVueCli(npmScript: "serve", port: 8080);
-                }
-                else
-                    spa.Options.SourcePath = "dist";
-            });
+            //app.UseSpa(spa =>
+            //{
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.Options.SourcePath = "ClientApps/Vue";
+            //        spa.UseVueCli(npmScript: "serve", port: 8080);
+            //    }
+            //    else
+            //        spa.Options.SourcePath = "dist";
+            //});
         }
     }
 }

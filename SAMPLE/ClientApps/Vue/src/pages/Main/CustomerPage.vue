@@ -39,7 +39,7 @@
 import BaseActions from "../../store/BaseActions";
 import { ControllerRoutes } from "../../constraints/Routes";
 import CreateUpdateForm from "../../components/Customer/CreateUpdateForm";
-import Products from "../../components/Customer/Products";
+import ProductList from "../../components/Customer/ProductList";
 import {toExcel} from "../../store/actions";
 
 export default {
@@ -97,7 +97,7 @@ export default {
       this.modalComponent = {
         visible: true,
         props: { customerId: customerId },
-        component: Products,
+          component: ProductList,
         size: "xl"
       };
     },

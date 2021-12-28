@@ -1,46 +1,46 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
+
 import EmptyLayout from "./layouts/EmptyLayout";
-import Login from "./pages/Account/Login";
-import Register from "./pages/Account/Register";
+import LoginPage from "./pages/Account/LoginPage";
+import RegisterPage from "./pages/Account/RegisterPage";
 import NotFound from "./pages/NotFound";
 import MainLayout from "./layouts/MainLayout";
-import Dashboard from "./pages/Main/Dashboard";
-import Customer from "./pages/Main/Customer";
-import User from "./pages/Main/User";
-import Product from "./pages/Main/Product";
-import Settings from "./pages/Main/Settings";
+import DashboardPage from "./pages/Main/DashboardPage";
+import CustomerPage from "./pages/Main/CustomerPage";
+import UserPage from "./pages/Main/UserPage";
+import ProductPage from "./pages/Main/ProductPage";
+import SettingsPage from "./pages/Main/SettingsPage";
 
-Vue.use(VueRouter);
-
-export const routes = [
-  {
-    path: "/account",
-    redirect: "login",
-    component: EmptyLayout,
-    children: [
-      { path: "login", component: Login, name: "login" },
-      { path: "register", component: Register, name: "register" }
-    ],
-    meta: { requiresAuth: false }
-  },
-  {
-    path: "/",
-    component: MainLayout,
-    children: [
-      { path: "/", component: Dashboard, name: "dashboard" },
-      { path: "customer", component: Customer, name: "customer" },
-      { path: "user", component: User, name: "user" },
-      { path: "product", component: Product, name: "product" },
-      { path: "settings", component: Settings, name: "settings" }
-    ],
-    meta: { requiresAuth: true }
-  },
-  { path: "/notfound", component: NotFound, name: "notfound" },
-  { path: "*", redirect: "/notfound" }
+const routes = [
+    {
+        path: "/account",
+        redirect: "login",
+        component: EmptyLayout,
+        children: [
+            { path: "login", component: LoginPage, name: "login" },
+            { path: "register", component: RegisterPage, name: "register" }
+        ],
+        meta: { requiresAuth: false }
+    },
+    {
+        path: "/",
+        component: MainLayout,
+        children: [
+            { path: "/", component: DashboardPage, name: "dashboard" },
+            { path: "customer", component: CustomerPage, name: "customer" },
+            { path: "user", component: UserPage, name: "user" },
+            { path: "product", component: ProductPage, name: "product" },
+            { path: "settings", component: SettingsPage, name: "settings" }
+        ],
+        meta: { requiresAuth: true }
+    },
+    { path: "/notfound", component: NotFound, name: "notfound" },
+    { path: "/:pathMatch(.*)*", redirect: "/notfound" }
 ];
 
-export const router = new VueRouter({
-  mode: "history",
-  routes
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
 });
+
+export default router;

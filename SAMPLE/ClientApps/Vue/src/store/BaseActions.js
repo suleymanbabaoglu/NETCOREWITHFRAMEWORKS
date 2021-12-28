@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Base, GeneralRoutes } from "../constraints/Routes";
 import {Actions, ErrorConstraints, ReturnConstraints} from "../constraints/Constraints";
-import {store} from "./store";
+import store from "./store";
 
 export default class BaseActions {
   constructor(controllerRoute) {

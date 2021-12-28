@@ -1,18 +1,14 @@
 <template>
-  <b-navbar :variant="variant" fixed="">
-    <b-collapse id="nav-collapse" is-nav>
-      <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown right>
-          <!-- Using 'button-content' slot -->
-          <template v-slot:button-content>
-            <em style="color: white">{{ user }}</em>
-          </template>
-          <b-dropdown-item @click="logout">Logout</b-dropdown-item>
-        </b-nav-item-dropdown>
-      </b-navbar-nav>
-    </b-collapse>
-  </b-navbar>
+  <div class="navbar bg-success" style="position:fixed;">
+    <div class="nav-collapse" id="nav-collapse">      
+      <div class="navbar-nav ml-auto">
+        <div class="nav-item-dropdown right">
+          <em style="color: white">{{ user }}</em>
+          <div class="dropdown-item" @click="logout">Logout</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import { Actions } from "../../constraints/Constraints";

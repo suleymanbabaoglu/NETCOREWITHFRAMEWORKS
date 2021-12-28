@@ -1,23 +1,14 @@
-import Vue from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
-import Axios from "axios";
-import VueAxios from "vue-axios";
-import { store } from "./store/store";
-import { router } from "./router";
-import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import store from "./store/store";
+import router from "./router";
 
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
 import { Actions } from "./constraints/Constraints";
 import BaseActions from "./store/BaseActions";
 import { ControllerRoutes, SettingsRoutes } from "./constraints/Routes";
 
-import JsonExcel from 'vue-json-excel'
-
-Vue.component('downloadExcel', JsonExcel)
-Vue.use(BootstrapVue);
-Vue.use(IconsPlugin);
-Vue.use(Axios, VueAxios);
+import JsonExcel from "vue-json-excel";
+import axios from "axios";
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
@@ -43,8 +34,10 @@ new BaseActions(ControllerRoutes.Settings)
     document.getElementsByTagName("title")[0].innerHTML = settings.title;
   });
 
-new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-}).$mount("#app");
+const app = createApp(App);
+app.config.globalProperties.$axios = axios;
+app.component("downloadExcel", JsonExcel);
+
+app.use(store);
+app.use(router);
+app.mount("#app");

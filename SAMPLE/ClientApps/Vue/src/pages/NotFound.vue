@@ -1,17 +1,7 @@
 <template>
     <div>
-        <b-container fluid="" class="text-center">
+        <div class="container fluid text-center">
             <h1 class="jumbotron">404 PAGE NOT FOUND</h1>
-        </b-container>
+        </div>
     </div>
 </template>
-
-<script>
-    export default {
-        name: "NotFound"
-    }
-</script>
-
-<style scoped>
-
-</style>

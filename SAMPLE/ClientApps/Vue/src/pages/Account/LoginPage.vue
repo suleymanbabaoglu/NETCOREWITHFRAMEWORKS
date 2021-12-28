@@ -1,11 +1,11 @@
 <template>
   <div class="row justify-content-center" style="margin-top: 5%">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
-      <b-card
-        style="max-width: 100%;background-color: darkseagreen"
-        class="mb-2"
+      <div
+        style="max-width: 100%; background-color: darkseagreen"
+        class="mb-2 card"
       >
-        <b-card-header>
+        <div class="card-header">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="-1350 50 4000 1200"
@@ -81,65 +81,61 @@
               </g>
             </g>
           </svg>
-        </b-card-header>
-        <b-card-text>
-          <b-form @submit.prevent="onSubmit">
-            <b-form-group>
-              <b-form-input
+        </div>
+        <div class="card-body">
+          <form @submit.prevent="onSubmit">
+            <div class="form-group">
+              <input
+                class="form-control"
                 v-model="form.email"
                 type="email"
                 required
                 placeholder="Enter E-mail"
               />
-            </b-form-group>
+            </div>
 
-            <b-form-group>
-              <b-form-input
+            <div class="form-group">
+              <input
+                class="form-control"
                 id="input-2"
                 v-model="form.password"
                 type="password"
                 required
                 placeholder="Enter Password"
-              ></b-form-input>
-            </b-form-group>
-            <b-form-group class="text-center">
-              <b-button
+              />
+            </div>
+            <div class="form-group text-center">
+              <button
                 type="submit"
-                variant="success"
-                class="mt-3"
+                class="btn btn-success mt-3"
                 style="width: 80%"
-                >Login</b-button
               >
+                Login
+              </button>
               <router-link to="register">
-                <b-button variant="primary" class="mt-3" style="width: 80%"
-                  >Register</b-button
-                >
+                <button class="btn btn-primary mt-3" style="width: 80%">
+                  Register
+                </button>
               </router-link>
-            </b-form-group>
-          </b-form>
-        </b-card-text>
-      </b-card>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import { Actions } from "../../constraints/Constraints";
-
-export default {
-  data() {
-    return {
-      form: {
-        email: "admin@admin.admin",
-        password: "1"
-      }
-    };
-  },
-  methods: {
-    onSubmit() {
-      this.$store.dispatch(Actions.LOGIN, this.form);
-    }
-  }
+import { reactive } from "vue";
+import { useStore } from "vuex";
+const store = useStore();
+const form = reactive({
+  email: "admin@admin.admin",
+  password: "1",
+});
+const onSubmit = () => {
+  store.dispatch(Actions.LOGIN, form);
 };
 </script>
 

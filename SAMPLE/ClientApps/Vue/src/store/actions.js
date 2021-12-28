@@ -1,7 +1,7 @@
 /* eslint-disable */
 import BaseActions from "./BaseActions";
 import {AccountRoutes, AuthRoutes} from "../constraints/Routes";
-import {router} from "../router";
+import router from "../router";
 
 
 export const login = async ({state}, payload) => {
@@ -62,7 +62,7 @@ export const isAuthenticated = () => {
     let tokenExpire = getLocalStorage().expire;
     return (
         token !== undefined &&
-        token.length > 50 &&
+        token?.length > 50 &&
         refreshToken !== undefined &&
         tokenExpire !== undefined
     );
